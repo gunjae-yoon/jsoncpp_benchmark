@@ -1,8 +1,8 @@
 #include <base/functional.h>
 
 namespace jcbm {
-	const Functional::QA Functional::question = { "value", {"alpha"}};
-	const Functional::QA Functional::answer = { "value", {"alpha"}};
+	const Functional::QA Functional::question = { "{\"ceta\":\"ceta\", \"alpha\":\"alpha\", \"beta\":\"beta\"}", {"ceta", "alpha", "beta"}};
+	const Functional::QA Functional::answer = { "{\"ceta\":\"ceta\", \"alpha\":\"alpha\", \"beta\":\"beta\"}", {"ceta", "alpha", "beta"}};
 
 	Functional::Functional() {
 	}
