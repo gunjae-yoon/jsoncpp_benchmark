@@ -9,8 +9,8 @@ namespace jcbm {
 		RapidJson();
 		virtual ~RapidJson();
 
-		bool doesDomKeepOrder(const std::string& q, const std::list<std::string>& a) const override;
-		bool doesSaxKeepOrder(const std::list<std::string>& q, const std::list<std::string>& a) const override;
+		bool doesDomKeepOrder(const std::string& q = Functional::question.text, const std::list<std::string>& a = Functional::answer.list) const override;
+		bool doesSaxKeepOrder(const std::list<std::string>& q = Functional::question.list, const std::list<std::string>& a = Functional::answer.list) const override;
 	};
 }
 
