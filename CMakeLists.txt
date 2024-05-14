@@ -60,6 +60,8 @@ set(MAIN_APP "jcbm")
 add_executable(${MAIN_APP}
 	${GEN_SRC}
 	src/main.cpp
+	src/base/functional.cpp
+	src/impl/rapidjson.cpp
 )
 add_dependencies(${MAIN_APP} GEN_TARGET)
 target_include_directories(${MAIN_APP} PRIVATE
