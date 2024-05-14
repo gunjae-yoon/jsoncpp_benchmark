@@ -61,6 +61,7 @@ add_executable(${MAIN_APP}
 	${GEN_SRC}
 	src/main.cpp
 	src/base/functional.cpp
+	src/base/performance.cpp
 	src/impl/rapidjson.cpp
 )
 add_dependencies(${MAIN_APP} GEN_TARGET)
