@@ -34,6 +34,8 @@ namespace jcbm {
 				qIter++;
 				aIter++;
 			}
+		} else {
+			return false;
 		}
 
 		return true;
@@ -68,6 +70,8 @@ namespace jcbm {
 				qIter++;
 				aIter++;
 			}
+		} else {
+			return false;
 		}
 
 		return true;
