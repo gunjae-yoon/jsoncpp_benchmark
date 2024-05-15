@@ -61,12 +61,12 @@ namespace jcbm {
 			while (qIter != d.MemberEnd()) {
 				std::cout << "parsing result: " << qIter->name.GetString() << ", expected result: " << (*aIter) << std::endl;
 
-				// step 2.1. check result
+				// step 3.1. check result
 				if (qIter->name.GetString() != (*aIter)) {
 					return false;
 				}
 				
-				// step 2.2. do next
+				// step 3.2. do next
 				qIter++;
 				aIter++;
 			}
