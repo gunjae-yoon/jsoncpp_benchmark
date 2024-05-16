@@ -4,6 +4,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <vector>
 
 using rapidjson::Document;
 using rapidjson::Value;
@@ -93,12 +94,24 @@ namespace jcbm {
 
 		// step 2. parse a JSON string into DOM
 		Document document;
+		std::vector<std::chrono::nanoseconds> results;
 		
-		std::chrono::time_point begin = std::chrono::system_clock::now();
-		document.Parse(text.c_str());
-		std::chrono::time_point end = std::chrono::system_clock::now();
+		for (size_t cnt = 0; cnt < Performance::REPEAT_COUNT; cnt++) {
+			std::chrono::time_point begin = std::chrono::system_clock::now();
+			document.Parse(text.c_str());
+			std::chrono::time_point end = std::chrono::system_clock::now();
+			results.push_back(end - begin);
+			document.SetObject();
+			//printf("[%2lu] result: %9lu\n", cnt, results[cnt].count());
+		}
+		
+		uint64_t total = 0;
+		for (std::chrono::nanoseconds& result : results) {
+			total += result.count();
+		}
+		//printf("average: %9lu\n", (total / Performance::REPEAT_COUNT));
 
-		return (end - begin);
+		return std::chrono::nanoseconds(total / Performance::REPEAT_COUNT);
 	}
 
 	std::chrono::nanoseconds RapidJson::parseNestedText() const {
@@ -114,11 +127,23 @@ namespace jcbm {
 
 		// step 2. parse a JSON string into DOM
 		Document document;
+		std::vector<std::chrono::nanoseconds> results;
 		
-		std::chrono::time_point begin = std::chrono::system_clock::now();
-		document.Parse(text.c_str());
-		std::chrono::time_point end = std::chrono::system_clock::now();
+		for (size_t cnt = 0; cnt < Performance::REPEAT_COUNT; cnt++) {
+			std::chrono::time_point begin = std::chrono::system_clock::now();
+			document.Parse(text.c_str());
+			std::chrono::time_point end = std::chrono::system_clock::now();
+			results.push_back(end - begin);
+			document.SetObject();
+			//printf("[%2lu] result: %9lu\n", cnt, results[cnt].count());
+		}
+		
+		uint64_t total = 0;
+		for (std::chrono::nanoseconds& result : results) {
+			total += result.count();
+		}
+		//printf("average: %9lu\n", (total / Performance::REPEAT_COUNT));
 
-		return (end - begin);
+		return std::chrono::nanoseconds(total / Performance::REPEAT_COUNT);
 	}
 }
