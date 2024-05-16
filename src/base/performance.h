@@ -3,12 +3,14 @@
 
 #include <chrono>
 #include <filesystem>
+#include <cstdint>
 
 namespace jcbm {
 	class Performance {
 	public:
 		static std::filesystem::path FLAT_TEXT_FILE_PATH;
 		static std::filesystem::path NESTED_TEXT_FILE_PATH;
+		static const uint64_t REPEAT_COUNT;
 
 	public:
 		Performance();
