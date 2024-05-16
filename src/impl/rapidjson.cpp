@@ -2,9 +2,12 @@
 #include <rapidjson/document.h>
 #include <rapidjson/stringbuffer.h>
 #include <iostream>
+#include <fstream>
+#include <sstream>
 
 using rapidjson::Document;
 using rapidjson::Value;
+using namespace std::chrono_literals;
 
 namespace jcbm {
 	RapidJson::RapidJson() {
@@ -75,5 +78,47 @@ namespace jcbm {
 		}
 
 		return true;
+	}
+
+	std::chrono::nanoseconds RapidJson::parseFlatText() const {
+		// step 1. read stream from file
+		std::ifstream file(Performance::FLAT_TEXT_FILE_PATH);
+		if (file.is_open() == false) {
+			return 0ns;
+		}
+
+		std::stringstream stream;
+		stream << file.rdbuf();
+		std::string text = stream.str();
+
+		// step 2. parse a JSON string into DOM
+		Document document;
+		
+		std::chrono::time_point begin = std::chrono::system_clock::now();
+		document.Parse(text.c_str());
+		std::chrono::time_point end = std::chrono::system_clock::now();
+
+		return (end - begin);
+	}
+
+	std::chrono::nanoseconds RapidJson::parseNestedText() const {
+		// step 1. read stream from file
+		std::ifstream file(Performance::NESTED_TEXT_FILE_PATH);
+		if (file.is_open() == false) {
+			return 0ns;
+		}
+
+		std::stringstream stream;
+		stream << file.rdbuf();
+		std::string text = stream.str();
+
+		// step 2. parse a JSON string into DOM
+		Document document;
+		
+		std::chrono::time_point begin = std::chrono::system_clock::now();
+		document.Parse(text.c_str());
+		std::chrono::time_point end = std::chrono::system_clock::now();
+
+		return (end - begin);
 	}
 }
