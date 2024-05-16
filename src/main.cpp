@@ -23,6 +23,14 @@ int main(int argc, char** argv) {
 	} else {
 		std::cout << "failed" << std::endl;
 	}
+	
+	Performance::FLAT_TEXT_FILE_PATH = "../sample/json_flat_1mb.json";
+	std::cout << std::endl;
+	std::cout << "flat  : " << rapid.parseFlatText().count() << " (ns)" << std::endl;
+
+	Performance::NESTED_TEXT_FILE_PATH = "../sample/json_nested_1mb.json";
+	std::cout << std::endl;
+	std::cout << "nested: " << rapid.parseNestedText().count() << " (ns)" << std::endl;
 
 	return 0;
 }
