@@ -3,6 +3,7 @@
 
 #include <impl/rapidjson.h>
 #include <impl/nlohmann.h>
+#include <impl/taojson.h>
 
 using namespace jcbm;
 
@@ -35,6 +36,7 @@ int main(int argc, char** argv) {
 	std::cout << std::endl;
 	std::cout << "nested: " << rapid.parseNestedText().count() << " (ns)" << std::endl;
 	
+
 	std::cout << std::endl;
 	std::cout << "---------- Nlohmann JSON ----------" << std::endl;
 	Nlohmann nlohmann;
@@ -60,6 +62,33 @@ int main(int argc, char** argv) {
 	Performance::NESTED_TEXT_FILE_PATH = "../sample/json_nested_1mb.json";
 	std::cout << std::endl;
 	std::cout << "nested: " << nlohmann.parseNestedText().count() << " (ns)" << std::endl;
-	
+
+
+	std::cout << std::endl;
+	std::cout << "---------- taoJSON ----------" << std::endl;
+	TaoJson tao;
+
+	std::cout << std::endl;
+	if (tao.doesDomKeepOrder()) {
+		std::cout << "passed" << std::endl;
+	} else {
+		std::cout << "failed" << std::endl;
+	}
+
+	std::cout << std::endl;
+	if (tao.doesSaxKeepOrder()) {
+		std::cout << "passed" << std::endl;
+	} else {
+		std::cout << "failed" << std::endl;
+	}
+
+	Performance::FLAT_TEXT_FILE_PATH = "../sample/json_flat_1mb.json";
+	std::cout << std::endl;
+	std::cout << "flat  : " << tao.parseFlatText().count() << " (ns)" << std::endl;
+
+	Performance::NESTED_TEXT_FILE_PATH = "../sample/json_nested_1mb.json";
+	std::cout << std::endl;
+	std::cout << "nested: " << tao.parseNestedText().count() << " (ns)" << std::endl;
+
 	return 0;
 }
