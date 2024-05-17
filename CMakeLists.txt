@@ -95,6 +95,7 @@ add_executable(${MAIN_APP}
 	src/base/performance.cpp
 	src/impl/rapidjson.cpp
 	src/impl/nlohmann.cpp
+	src/impl/taojson.cpp
 )
 add_dependencies(${MAIN_APP} GEN_TARGET)
 target_include_directories(${MAIN_APP} PRIVATE
