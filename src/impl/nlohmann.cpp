@@ -42,8 +42,34 @@ namespace jcbm {
 
 	bool Nlohmann::doesSaxKeepOrder(const std::list<std::string>& q, const std::list<std::string>& a) const {
 		// step 1. create an empty JSON object
+		json document;
+		document = {};
+		
 		// step 2. add members
+		for (const std::string& elem: q) {
+			document[elem] = "";
+		}
+
 		// step 3. access sequentially
+		if (document.is_object()) {
+			json::iterator qIter = document.begin();
+			std::list<std::string>::const_iterator aIter = a.begin();
+			while (qIter != document.end()) {
+				std::cout << "parsing result: " << qIter.key() << ", expected result: " << (*aIter) << std::endl;
+				
+				// step 2.1. check result
+				if (qIter.key() != (*aIter)) {
+					return false;
+				}
+		
+				// step 2.2. do next
+				qIter++;
+				aIter++;
+			}
+		} else {
+			return false;
+		}
+
 		return true;
 	}
 
