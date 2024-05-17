@@ -46,5 +46,12 @@ int main(int argc, char** argv) {
 		std::cout << "failed" << std::endl;
 	}
 
+	std::cout << std::endl;
+	if (nlohmann.doesSaxKeepOrder()) {
+		std::cout << "passed" << std::endl;
+	} else {
+		std::cout << "failed" << std::endl;
+	}
+
 	return 0;
 }
