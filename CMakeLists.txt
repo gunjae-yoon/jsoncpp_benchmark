@@ -42,7 +42,7 @@ message(STATUS "Make RapidJSON available - done")
 
 message(STATUS "Fetch Nlohmann JSON")
 FetchContent_Declare(
-	nlohmann	
+	nlohmann
 	GIT_REPOSITORY "https://github.com/nlohmann/json"
 	GIT_TAG        "v3.11.3"
 )
@@ -55,6 +55,21 @@ if(NOT nlohmann_POPULATED)
 	add_subdirectory(${nlohmann_SOURCE_DIR} ${nlohmann_BINARY_DIR})
 endif()
 message(STATUS "Make Nlohmann JSON available - done")
+
+message(STATUS "Fetch taoJSON")
+FetchContent_Declare(
+	taojson
+	GIT_REPOSITORY "https://github.com/taocpp/json"
+	GIT_TAG        "1.0.0-beta.14"
+)
+message(STATUS "Fetch taoJSON - done")
+message(STATUS "Make taoJSON available")
+FetchContent_GetProperties(taojson)
+if(NOT taojson )
+	FetchContent_Populate(taojson)
+	add_subdirectory(${taojson_SOURCE_DIR} ${taojson_BINARY_DIR})
+endif()
+message(STATUS "Make taoJSON available - done")
 
 ##########################################################################
 # automatic code generations
@@ -85,5 +100,6 @@ add_dependencies(${MAIN_APP} GEN_TARGET)
 target_include_directories(${MAIN_APP} PRIVATE
 	${rapidjson_SOURCE_DIR}/include
 	${nlohmann_SOURCE_DIR}/include
+	${taojson_SOURCE_DIR}/include
 	src
 )
