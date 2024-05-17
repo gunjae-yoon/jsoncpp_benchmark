@@ -84,5 +84,6 @@ add_executable(${MAIN_APP}
 add_dependencies(${MAIN_APP} GEN_TARGET)
 target_include_directories(${MAIN_APP} PRIVATE
 	${rapidjson_SOURCE_DIR}/include
+	${nlohmann_SOURCE_DIR}/include
 	src
 )
