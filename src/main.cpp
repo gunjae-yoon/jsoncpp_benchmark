@@ -2,6 +2,7 @@
 #include <iostream>
 
 #include <impl/rapidjson.h>
+#include <impl/nlohmann.h>
 
 using namespace jcbm;
 
@@ -31,6 +32,14 @@ int main(int argc, char** argv) {
 	Performance::NESTED_TEXT_FILE_PATH = "../sample/json_nested_1mb.json";
 	std::cout << std::endl;
 	std::cout << "nested: " << rapid.parseNestedText().count() << " (ns)" << std::endl;
+	
+	Nlohmann nlohmann;
+	std::cout << std::endl;
+	if (nlohmann.doesDomKeepOrder()) {
+		std::cout << "passed" << std::endl;
+	} else {
+		std::cout << "failed" << std::endl;
+	}
 
 	return 0;
 }
