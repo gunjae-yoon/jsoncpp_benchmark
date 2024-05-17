@@ -61,14 +61,12 @@ FetchContent_Declare(
 	taojson
 	GIT_REPOSITORY "https://github.com/taocpp/json"
 	GIT_TAG        "1.0.0-beta.14"
+	#GIT_TAG        "2.0.0"
 )
 message(STATUS "Fetch taoJSON - done")
+
 message(STATUS "Make taoJSON available")
-FetchContent_GetProperties(taojson)
-if(NOT taojson )
-	FetchContent_Populate(taojson)
-	add_subdirectory(${taojson_SOURCE_DIR} ${taojson_BINARY_DIR})
-endif()
+FetchContent_MakeAvailable(taojson)
 message(STATUS "Make taoJSON available - done")
 
 ##########################################################################
@@ -101,6 +99,7 @@ add_dependencies(${MAIN_APP} GEN_TARGET)
 target_include_directories(${MAIN_APP} PRIVATE
 	${rapidjson_SOURCE_DIR}/include
 	${nlohmann_SOURCE_DIR}/include
+	${pegtl_SOURCE_DIR}/include # submodule of taojson
 	${taojson_SOURCE_DIR}/include
 	src
 )
