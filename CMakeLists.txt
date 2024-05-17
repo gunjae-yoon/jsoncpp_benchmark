@@ -40,6 +40,22 @@ if(NOT rapidjson_POPULATED)
 endif()
 message(STATUS "Make RapidJSON available - done")
 
+message(STATUS "Fetch Nlohmann JSON")
+FetchContent_Declare(
+	nlohmann	
+	GIT_REPOSITORY "https://github.com/nlohmann/json"
+	GIT_TAG        "v3.11.3"
+)
+message(STATUS "Fetch Nlohmann JSON - done")
+
+message(STATUS "Make Nlohmann JSON available")
+FetchContent_GetProperties(nlohmann)
+if(NOT nlohmann_POPULATED)
+	FetchContent_Populate(nlohmann)
+	add_subdirectory(${nlohmann_SOURCE_DIR} ${nlohmann_BINARY_DIR})
+endif()
+message(STATUS "Make Nlohmann JSON available - done")
+
 ##########################################################################
 # automatic code generations
 ##########################################################################
@@ -63,6 +79,7 @@ add_executable(${MAIN_APP}
 	src/base/functional.cpp
 	src/base/performance.cpp
 	src/impl/rapidjson.cpp
+	src/impl/nlohmann.cpp
 )
 add_dependencies(${MAIN_APP} GEN_TARGET)
 target_include_directories(${MAIN_APP} PRIVATE
