@@ -18,20 +18,25 @@ namespace jcbm {
 		json document = json::parse(q);
 
 		// step 2. access sequentially
-		json::iterator qIter = document.begin();
-		std::list<std::string>::const_iterator aIter = a.begin();
-		while (qIter != document.end()) {
-			std::cout << "parsing result: " << qIter.key() << ", expected result: " << (*aIter) << std::endl;
-			
-			// step 2.1. check result
-			if (qIter.key() != (*aIter)) {
-				return false;
+		if (document.is_object()) {
+			json::iterator qIter = document.begin();
+			std::list<std::string>::const_iterator aIter = a.begin();
+			while (qIter != document.end()) {
+				std::cout << "parsing result: " << qIter.key() << ", expected result: " << (*aIter) << std::endl;
+				
+				// step 2.1. check result
+				if (qIter.key() != (*aIter)) {
+					return false;
+				}
+		
+				// step 2.2. do next
+				qIter++;
+				aIter++;
 			}
-
-			// step 2.2. do next
-			qIter++;
-			aIter++;
+		} else {
+			return false;
 		}
+
 		return true;
 	}
 

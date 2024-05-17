@@ -9,6 +9,8 @@ using namespace jcbm;
 int main(int argc, char** argv) {
 	std::cout << "version: " << Version::full << std::endl;
 	
+	std::cout << std::endl;
+	std::cout << "---------- RapidJSON ----------" << std::endl;
 	RapidJson rapid;
 
 	std::cout << std::endl;
@@ -33,7 +35,10 @@ int main(int argc, char** argv) {
 	std::cout << std::endl;
 	std::cout << "nested: " << rapid.parseNestedText().count() << " (ns)" << std::endl;
 	
+	std::cout << std::endl;
+	std::cout << "---------- Nlohmann JSON ----------" << std::endl;
 	Nlohmann nlohmann;
+
 	std::cout << std::endl;
 	if (nlohmann.doesDomKeepOrder()) {
 		std::cout << "passed" << std::endl;
