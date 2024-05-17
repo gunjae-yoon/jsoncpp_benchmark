@@ -53,5 +53,13 @@ int main(int argc, char** argv) {
 		std::cout << "failed" << std::endl;
 	}
 
+	Performance::FLAT_TEXT_FILE_PATH = "../sample/json_flat_1mb.json";
+	std::cout << std::endl;
+	std::cout << "flat  : " << nlohmann.parseFlatText().count() << " (ns)" << std::endl;
+
+	Performance::NESTED_TEXT_FILE_PATH = "../sample/json_nested_1mb.json";
+	std::cout << std::endl;
+	std::cout << "nested: " << nlohmann.parseNestedText().count() << " (ns)" << std::endl;
+	
 	return 0;
 }
